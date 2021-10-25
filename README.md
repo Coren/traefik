@@ -21,6 +21,12 @@ Go
 sudo apt-get install -t buster-backports golang-go
 </code>
 
+For vim plugin with TypeScript, add this to .vimrc
+<code>
+Plugin 'leafgarland/typescript-vim'
+</code>
+Close, reopen vim and install this new plugin `:pluginInstall`
+
 
 We also need to install and configure a first cloud provider. Let's try with Google, since I already have a Google Account.
 
@@ -45,7 +51,7 @@ gcloud auth application-default login
 And that's it !
 
 
-## Step 2 : Let's test tutorials
+## Step 2 : Let's test a basic tutorial
 
 
 Let's see the javascript way.
@@ -68,5 +74,17 @@ If ressources are unsync, you can refresh when creating env :
 pulumi up --refresh
 </code>
 
+## Step 3 : Let's test a basic GKE deployment
+
+Pulumi provides an how-to here:
+https://www.pulumi.com/registry/packages/kubernetes/how-to-guides/gke/
+
+And an api reference with GCP here:
+https://www.pulumi.com/registry/packages/gcp/api-docs/
+
+<code>
+mkdir test-02-basic-gke-hello-world && cd test-02-basic-gke-hello-world
+pulumi new typescript
+</code>
 
 
