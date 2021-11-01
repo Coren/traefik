@@ -87,4 +87,14 @@ mkdir test-02-basic-gke-hello-world && cd test-02-basic-gke-hello-world
 pulumi new typescript
 </code>
 
+## Step 4 : Let's begin a more elaborate, traefik-based, deployment
+
+<code>
+mkdir test-03-foobar-on-gke-with-dns && cd test-03-foobar-on-gke-with-dns
+pulumi new kubernetes-typescript
+</code>
+
+# We can split source code of test-02, as shown on Canary Deployment Pulumi example
+## https://github.com/pulumi/examples/tree/master/gcp-ts-gke
+
 

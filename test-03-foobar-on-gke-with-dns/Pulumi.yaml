@@ -1,0 +1,3 @@
+name: test-03-foobar-on-gke-with-dns
+runtime: nodejs
+description: Test foobar with dns on GKE

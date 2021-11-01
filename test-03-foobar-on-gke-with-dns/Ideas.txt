@@ -1,0 +1,47 @@
+0. Rework tutorial in order to use Traefik instead of Nginx
+   With access to Traefik admin interfance (!)
+
+
+1. Put foobar into a docker
+
+
+2. Use CloudFlare DNS, which is available in pulumi
+https://www.pulumi.com/registry/packages/cloudflare/
+
+3. Use GCR to push the Docker
+https://stackoverflow.com/questions/69413119/deploying-helloworld-docker-images-to-gke-with-pulumi
+https://www.pulumi.com/registry/packages/gcp/api-docs/container/getregistryrepository/
+
+4. Use and deploy foobar on GKE
+
+
+5. Use and deploy cert-manager, for automatic let's encrypt certificates
+https://www.fosstechnix.com/traefik-letsencrypt/
+https://blog.alterway.fr/kubernetes-ingress-controller-avec-traefik-et-lets-encrypt.html
+
+
+If needed:
+(Example of a well-organised pulumi source code)
+https://github.com/pulumi/examples/tree/master/gcp-ts-gke
+(Use cert-manger as a private PKI)
+https://github.com/jakexks/cloudengsummit2020/blob/master/pulumi/main.go 
+(Use helm to deploy traefik and grafana)
+https://blog.devgenius.io/quickstart-with-traefik-v2-on-kubernetes-e6dff0d65216
+(Let's encrypt with a script on nginx)
+https://runnable.com/blog/how-to-use-lets-encrypt-on-kubernetes
+(Demo of CRD to Pulumi, quite impressive)
+https://www.pulumi.com/resources/certificates-as-code-with-pulumi-and-cert-manager/
+
+(Pulumi has made a Kube Yaml to Pulumi converter)
+https://www.pulumi.com/kube2pulumi/
+https://www.pulumi.com/blog/new-kubernetes-superpowers/
+
+(Official Traefik guide)
+https://doc.traefik.io/traefik/user-guides/crd-acme/
+https://doc.traefik.io/traefik/providers/kubernetes-crd/
+https://doc.traefik.io/traefik/providers/kubernetes-ingress/
+https://doc.traefik.io/traefik/v1.7/user-guide/kubernetes/
+
+(It seems that Pulumi has chosen a better path to be up-to-date with cloud providers, see selected comment)
+https://www.youtube.com/watch?v=RaoKcJGchKM&lc=UgyWvxQ7sclssgVdLpt4AaABAg 
+
