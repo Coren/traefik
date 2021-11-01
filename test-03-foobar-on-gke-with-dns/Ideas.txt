@@ -1,16 +1,8 @@
 0. Rework tutorial in order to use Traefik instead of Nginx
-   With access to Traefik admin interfance (!)
-
-
-1. Put foobar into a docker
-
+   With access to Traefik admin interface (!)
 
 2. Use CloudFlare DNS, which is available in pulumi
 https://www.pulumi.com/registry/packages/cloudflare/
-
-3. Use GCR to push the Docker
-https://stackoverflow.com/questions/69413119/deploying-helloworld-docker-images-to-gke-with-pulumi
-https://www.pulumi.com/registry/packages/gcp/api-docs/container/getregistryrepository/
 
 4. Use and deploy foobar on GKE
 
@@ -35,6 +27,12 @@ https://www.pulumi.com/resources/certificates-as-code-with-pulumi-and-cert-manag
 (Pulumi has made a Kube Yaml to Pulumi converter)
 https://www.pulumi.com/kube2pulumi/
 https://www.pulumi.com/blog/new-kubernetes-superpowers/
+
+(Pulumi example for build & push docker to GCR)
+https://stackoverflow.com/questions/69413119/deploying-helloworld-docker-images-to-gke-with-pulumi
+https://www.pulumi.com/registry/packages/gcp/api-docs/container/getregistryrepository/
+
+
 
 (Official Traefik guide)
 https://doc.traefik.io/traefik/user-guides/crd-acme/
