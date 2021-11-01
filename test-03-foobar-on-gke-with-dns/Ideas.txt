@@ -42,6 +42,9 @@ https://doc.traefik.io/traefik/providers/kubernetes-crd/
 https://doc.traefik.io/traefik/providers/kubernetes-ingress/
 https://doc.traefik.io/traefik/v1.7/user-guide/kubernetes/
 
+(Official golangci-lint Doc)
+https://golangci-lint.run/usage/install/
+
 (It seems that Pulumi has chosen a better path to be up-to-date with cloud providers, see selected comment)
 https://www.youtube.com/watch?v=RaoKcJGchKM&lc=UgyWvxQ7sclssgVdLpt4AaABAg 
 
