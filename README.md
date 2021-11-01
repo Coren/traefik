@@ -97,4 +97,7 @@ pulumi new kubernetes-typescript
 # We can split source code of test-02, as shown on Canary Deployment Pulumi example
 ## https://github.com/pulumi/examples/tree/master/gcp-ts-gke
 
-
+# Made a simple Dockerfile, with self-signed cert  for the momnet
+# Need to configure docker auth, gcloud auth is not enough for GCR
+## https://cloud.google.com/container-registry/docs/advanced-authentication#gcloud-helper
+## gcloud auth configure-docker

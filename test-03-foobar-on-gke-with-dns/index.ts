@@ -1,3 +1,5 @@
+import * as docker from "@pulumi/docker";
+import * as gcp from "@pulumi/gcp";
 import * as k8s from "@pulumi/kubernetes";
 import * as pulumi from "@pulumi/pulumi";
 import { kubeConfig, kubeProvider } from "./cluster";
@@ -11,6 +13,21 @@ const ns = new k8s.core.v1.Namespace(baseName, {}, { provider: kubeProvider });
 
 // Export the Namespace name
 export const namespaceName = ns.metadata.apply(m => m.name);
+
+// Get the GCP project registry repository & URL
+const registry = gcp.container.getRegistryRepository();
+const repositoryUrl = registry.then(_r => _r.repositoryUrl);
+
+// Build foobar-api, aka whoami, app
+const customImage = "whoami";
+const appImage = new docker.Image(customImage, {
+    imageName: pulumi.interpolate`${repositoryUrl}/${customImage}:v1.0.0`,
+    build: {
+        context: `./${customImage}`,
+    },
+});
+
+export const imageId = appImage.id;
 
 // Create a NGINX Deployment
 const appLabels = { appClass: baseName };
