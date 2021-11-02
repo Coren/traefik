@@ -32,7 +32,8 @@ https://www.pulumi.com/blog/new-kubernetes-superpowers/
 https://stackoverflow.com/questions/69413119/deploying-helloworld-docker-images-to-gke-with-pulumi
 https://www.pulumi.com/registry/packages/gcp/api-docs/container/getregistryrepository/
 
-
+(Pulumi provides a simpler extension to k8s stuff, it seems so cool !)
+https://github.com/pulumi/pulumi-kubernetesx
 
 (Official Traefik guide)
 https://doc.traefik.io/traefik/user-guides/crd-acme/

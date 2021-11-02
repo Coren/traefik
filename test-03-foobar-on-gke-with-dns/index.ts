@@ -27,6 +27,7 @@ const appImage = new docker.Image(customImage, {
     },
 });
 
+// Export full Image reference
 export const imageId = appImage.id;
 
 // Create a NGINX Deployment
@@ -48,8 +49,8 @@ const deployment = new k8s.apps.v1.Deployment(baseName,
                     containers: [
                         {
                             name: baseName,
-                            image: "nginx:latest",
-                            ports: [{ name: "http", containerPort: 80 }]
+                            image: appImage.imageName,
+                            ports: [{ name: "https", containerPort: 443 }]
                         }
                     ],
                 }
@@ -73,7 +74,7 @@ const service = new k8s.core.v1.Service(baseName,
         },
         spec: {
             type: "LoadBalancer",
-            ports: [{ port: 80, targetPort: "http" }],
+            ports: [{ port: 443, targetPort: "https" }],
             selector: appLabels,
         },
     },
