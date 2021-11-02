@@ -4,6 +4,7 @@
         "@types/node": "latest"
     },
     "dependencies": {
+        "@pulumi/cloudflare": "latest",
         "@pulumi/docker": "latest",
         "@pulumi/gcp": "latest",
         "@pulumi/kubernetes": "latest",

@@ -25,6 +25,14 @@ https://runnable.com/blog/how-to-use-lets-encrypt-on-kubernetes
 (Demo of CRD to Pulumi, quite impressive)
 https://www.pulumi.com/resources/certificates-as-code-with-pulumi-and-cert-manager/
 
+
+
+(Cloudflare & Pulumi related documentation)
+https://github.com/pulumi/pulumi-cloudflare/blob/master/README.md
+https://www.pulumi.com/registry/packages/cloudflare/api-docs
+https://api.cloudflare.com/#getting-started-endpoints
+
+
 (Pulumi has made a Kube Yaml to Pulumi converter)
 https://www.pulumi.com/kube2pulumi/
 https://www.pulumi.com/blog/new-kubernetes-superpowers/

@@ -1,12 +1,15 @@
 import * as docker from "@pulumi/docker";
 import * as gcp from "@pulumi/gcp";
 import * as k8s from "@pulumi/kubernetes";
+import * as cloudflare from "@pulumi/cloudflare";
 import * as pulumi from "@pulumi/pulumi";
 import { kubeConfig, kubeProvider } from "./cluster";
-import { baseName } from "./config";
+import { baseName, cfZoneId, dnsName } from "./config";
 
 
 export { kubeConfig };
+
+export const dnsZone = cloudflare.Zone.get(baseName, cfZoneId).zone;
 
 // Create a Kubernetes Namespace
 const ns = new k8s.core.v1.Namespace(baseName, {}, { provider: kubeProvider });
@@ -87,3 +90,12 @@ const service = new k8s.core.v1.Service(baseName,
 export const serviceName = service.metadata.apply(m => m.name);
 export const servicePublicIP = service.status.apply(s => s.loadBalancer.ingress[0].ip)
 
+// Create and export DNS record. TTL unit is in seconds
+const dnsRecord = new cloudflare.Record(baseName, {
+  name: dnsName,
+  zoneId: cfZoneId,
+  type: "A",
+  value: servicePublicIP,
+  ttl: 300
+});
+export const serviceDNS = dnsRecord.hostname;
