@@ -1,3 +1,0 @@
-config:
-  gcp:project: traefik-330008
-  gcp:zone: europe-west6-a
