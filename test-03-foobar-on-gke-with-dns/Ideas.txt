@@ -4,12 +4,13 @@
 2. Use CloudFlare DNS, which is available in pulumi
 https://www.pulumi.com/registry/packages/cloudflare/
 
-4. Use and deploy foobar on GKE
-
 
 5. Use and deploy cert-manager, for automatic let's encrypt certificates
 https://www.fosstechnix.com/traefik-letsencrypt/
 https://blog.alterway.fr/kubernetes-ingress-controller-avec-traefik-et-lets-encrypt.html
+
+6. Deploy kube web ui
+https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/ 
 
 
 If needed:
