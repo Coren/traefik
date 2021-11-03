@@ -1,58 +1,98 @@
-0. Rework tutorial in order to use Traefik instead of Nginx
-   With access to Traefik admin interface (!)
+TODO List
+==========
 
-2. Use CloudFlare DNS, which is available in pulumi
-https://www.pulumi.com/registry/packages/cloudflare/
+0. Implement & configure Liveness and readiness
+
+1. Deploy and Access kube Web UI
+
+2. Deploy traeffik ingress and Access traefik Web UI, instead of GKE
+
+3. Multi Region
+
+Optional:
+# dockerfile build with Makefile
+# Secured HTTPs, in order to pass Qualys SSL Check
+#* TLS 1.3 in order to pass Qualys SSL check
+#** https://doc.traefik.io/traefik/https/tls/#tls-options
+#** https://github.com/sleighzy/k3s-traefik-v2-kubernetes-crd/blob/master/002-middlewares-secure-headers.yaml
+# Provides TLS certs inside the pod with CSI and a private CA : https://cert-manager.io/docs/usage/csi/
+# Enhance CloudFlare part
+#* Use a cloudflare API Token dedicated to Zone Management (described in this : https://cert-manager.io/docs/configuration/acme/dns01/cloudflare/)
+#* Get ZoneId with source code => Remove one config item
+# Less and simpler code, with k8x instead of k8s
+# Change privateKeySecretRef, from baseName to acmeProvider
 
 
-5. Use and deploy cert-manager, for automatic let's encrypt certificates
+Open Issues encountered
+==============
+1) Pulumi does not wait for GKE Ingress to get Public IP :
+ https://github.com/pulumi/pulumi-kubernetes/issues/1649
+=> Forced me to use external static IP.
+=> Documentation bug, one should use regional-static-ip, not global :
+ https://stackoverflow.com/a/68153552
+=> Fixed : You have to use "GlobalAddress" and not "Adress", which is regional
+
+2) Pulumi needs multiple config Object, for changing namespace
+  https://github.com/pulumi/pulumi/issues/3730
+
+3) Cert-Manager documentation bug. One should use "apiTokenSecretRef" and not "apiKeySecretRef"
+
+
+Useful Links
+============
 https://www.fosstechnix.com/traefik-letsencrypt/
-https://blog.alterway.fr/kubernetes-ingress-controller-avec-traefik-et-lets-encrypt.html
+https://github.com/sleighzy/k3s-traefik-v2-kubernetes-crd
+https://doc.traefik.io/traefik/migration/v1-to-v2/
+https://doc.traefik.io/traefik/migration/v2/ => Critical Information here (!!!)
+RAW full & simple Traefik v2 CRD : https://raw.githubusercontent.com/traefik/traefik/v2.5/docs/content/reference/dynamic-configuration/kubernetes-crd-definition-v1beta1.yml
 
-6. Deploy kube web ui
-https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/ 
+GKE Ingress doc:
+  https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb
+  https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features
+  https://cloud.google.com/kubernetes-engine/docs/how-to/internal-load-balancing
 
-
-If needed:
-(Example of a well-organised pulumi source code)
-https://github.com/pulumi/examples/tree/master/gcp-ts-gke
-(Use cert-manger as a private PKI)
-https://github.com/jakexks/cloudengsummit2020/blob/master/pulumi/main.go 
-(Use helm to deploy traefik and grafana)
-https://blog.devgenius.io/quickstart-with-traefik-v2-on-kubernetes-e6dff0d65216
-(Let's encrypt with a script on nginx)
-https://runnable.com/blog/how-to-use-lets-encrypt-on-kubernetes
-(Demo of CRD to Pulumi, quite impressive)
-https://www.pulumi.com/resources/certificates-as-code-with-pulumi-and-cert-manager/
+GKE TLS doc:
+  https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-multi-ssl
 
 
-
-(Cloudflare & Pulumi related documentation)
+DNS, Cloudflare & Pulumi related documentation:
 https://github.com/pulumi/pulumi-cloudflare/blob/master/README.md
 https://www.pulumi.com/registry/packages/cloudflare/api-docs
 https://api.cloudflare.com/#getting-started-endpoints
 
 
-(Pulumi has made a Kube Yaml to Pulumi converter)
-https://www.pulumi.com/kube2pulumi/
-https://www.pulumi.com/blog/new-kubernetes-superpowers/
+Cert-manager, Cloudflare & Pulumi related documentation:
+https://cert-manager.io/docs/installation/kubectl/
+https://cert-manager.io/docs/configuration/acme/dns01/cloudflare/
+https://sysadmins.co.za/https-using-letsencrypt-and-traefik-with-k3s/
 
-(Pulumi example for build & push docker to GCR)
+
+Pulumi example for build & push docker to GCR:
 https://stackoverflow.com/questions/69413119/deploying-helloworld-docker-images-to-gke-with-pulumi
 https://www.pulumi.com/registry/packages/gcp/api-docs/container/getregistryrepository/
 
-(Pulumi provides a simpler extension to k8s stuff, it seems so cool !)
-https://github.com/pulumi/pulumi-kubernetesx
 
-(Official Traefik guide)
+
+Official Traefik guides:
 https://doc.traefik.io/traefik/user-guides/crd-acme/
 https://doc.traefik.io/traefik/providers/kubernetes-crd/
 https://doc.traefik.io/traefik/providers/kubernetes-ingress/
 https://doc.traefik.io/traefik/v1.7/user-guide/kubernetes/
 
-(Official golangci-lint Doc)
+Official golangci-lint Doc:
 https://golangci-lint.run/usage/install/
 
-(It seems that Pulumi has chosen a better path to be up-to-date with cloud providers, see selected comment)
-https://www.youtube.com/watch?v=RaoKcJGchKM&lc=UgyWvxQ7sclssgVdLpt4AaABAg 
+Pulumi general informations:
+* Pulumi provides a simpler extension to k8s stuff, it's not prod ready but the look of the IaC is far more readable !
+** https://github.com/pulumi/pulumi-kubernetesx
+* It seems that Pulumi has chosen a better path to be up-to-date with cloud providers, see selected comment : https://www.youtube.com/watch?v=RaoKcJGchKM&lc=UgyWvxQ7sclssgVdLpt4AaABAg 
+* Pulumi has made a Kube Yaml to Pulumi converter:
+** https://www.pulumi.com/kube2pulumi/
+** https://www.pulumi.com/blog/new-kubernetes-superpowers/
+
+
+This assignement :
+* It seems foobar is based on/related to Traefik whoami:
+** https://hub.docker.com/r/containous/whoami
+** https://github.com/traefik/whoami
 

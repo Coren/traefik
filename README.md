@@ -87,17 +87,24 @@ mkdir test-02-basic-gke-hello-world && cd test-02-basic-gke-hello-world
 pulumi new typescript
 </code>
 
-## Step 4 : Let's begin a more elaborate, traefik-based, deployment
+## Step 4 : Let's begin a more elaborate, ingress-based & cert-managed, deployment
 
 <code>
 mkdir test-03-foobar-on-gke-with-dns && cd test-03-foobar-on-gke-with-dns
 pulumi new kubernetes-typescript
 </code>
 
-# We can split source code of test-02, as shown on Canary Deployment Pulumi example
+# Split source code of test-02, as shown on Canary Deployment Pulumi example
 ## https://github.com/pulumi/examples/tree/master/gcp-ts-gke
-
 # Made a simple Dockerfile, with self-signed cert  for the momnet
 # Need to configure docker auth, gcloud auth is not enough for GCR
 ## https://cloud.google.com/container-registry/docs/advanced-authentication#gcloud-helper
 ## gcloud auth configure-docker
+# Created an account on CloudFlare, pick up a Zone and create an API Account.
+## pulumi config set cloudflare:apiToken
+# Get zoneId with Curl, and put it into config :
+## config pulumi config set cfZoneId --secret
+# Read (a lot) of GKE, CloudFlare & cert-manager doc
+# cert-manager will use CloudFlare dns account
+
+
