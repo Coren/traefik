@@ -1,0 +1,7 @@
+config:
+  aws:region: eu-west-3
+  cloudflare:apiToken:
+    secure: AAABALWdm/1LKT4DCGNzVAgGXsVD45HG/aOpIxBQT3nNDvC2dE+DBxx475NZ5im3W6QRdlpQkqraxFp/U5MwxXKk0AGI3XoF
+  test-04-foobar-on-eks:cfZoneId:
+    secure: AAABAHeoTDcwd2WbpVhyFje/PbEThZwtkwd8N0k1/GCYMMYkMQzbKaX+W4N8cnVwnWz7xfv0MRfAiBV1SwDopg==
+  test-04-foobar-on-eks:emailAccount: michel@loiseleur.com

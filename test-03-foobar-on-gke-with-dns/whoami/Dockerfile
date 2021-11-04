@@ -24,5 +24,6 @@ FROM scratch
 WORKDIR /bin
 COPY --from=builder /go/src/foobar-api/whoami /bin/whoami
 COPY --from=builder /go/src/*.pem /cert/
+# COPY *.pem /cert/
 ENTRYPOINT ["/bin/whoami" ]
 CMD [ "-name", "whoami", "-port", "443" ]

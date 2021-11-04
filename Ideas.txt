@@ -3,11 +3,7 @@ TODO List
 
 0. Implement & configure Liveness and readiness
 
-1. Deploy and Access kube Web UI
-
-2. Deploy traeffik ingress and Access traefik Web UI, instead of GKE
-
-3. Multi Region
+1. Multi Region
 
 Optional:
 # dockerfile build with Makefile
@@ -21,6 +17,8 @@ Optional:
 #* Get ZoneId with source code => Remove one config item
 # Less and simpler code, with k8x instead of k8s
 # Change privateKeySecretRef, from baseName to acmeProvider
+# Deploy and Access kube Web UI
+# Deploy traeffik ingress and Access traefik Web UI, instead of GKE & ALB
 
 
 Open Issues encountered
@@ -37,9 +35,26 @@ Open Issues encountered
 
 3) Cert-Manager documentation bug. One should use "apiTokenSecretRef" and not "apiKeySecretRef"
 
+4) Pulumi dependsOn is not fully aware of all ressources created:
+  https://github.com/pulumi/pulumi-kubernetes/issues/861
 
-Useful Links
+5) AWS Load Balancer launch bug
+  https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/2013
+
+6) No example anywhere for JSON loading, needed for EKS LB IAM, but I managed to make my Useful
+
+7) Forced to tag manually subnet with aws cli like :
+  aws ec2 create-tags  --resources subnet-0f640f89a133b6f00 --tags Key="kubernetes.io/role/internal-elb",Value=1
+  See https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.3/deploy/subnet_discovery/
+
+
+
+own Links
 ============
+Pulumi multi-cloud:
+https://github.com/pulumi/examples/blob/master/kubernetes-ts-multicloud
+
+Traefik:
 https://www.fosstechnix.com/traefik-letsencrypt/
 https://github.com/sleighzy/k3s-traefik-v2-kubernetes-crd
 https://doc.traefik.io/traefik/migration/v1-to-v2/
@@ -54,6 +69,14 @@ GKE Ingress doc:
 GKE TLS doc:
   https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-multi-ssl
 
+Kube Liveness & Readyness doc:
+  https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#http-probes
+
+EKS Ingress doc:
+  https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html
+  https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.3/deploy/installation/#apply-yaml 
+  https://www.pulumi.com/blog/kubernetes-ingress-with-aws-alb-ingress-controller-and-pulumi-crosswalk/ => Far better doc, IAM is provided
+  https://docs.aws.amazon.com/eks/latest/userguide/cni-increase-ip-addresses.html => VPC & IP Address
 
 DNS, Cloudflare & Pulumi related documentation:
 https://github.com/pulumi/pulumi-cloudflare/blob/master/README.md
@@ -85,10 +108,14 @@ https://golangci-lint.run/usage/install/
 Pulumi general informations:
 * Pulumi provides a simpler extension to k8s stuff, it's not prod ready but the look of the IaC is far more readable !
 ** https://github.com/pulumi/pulumi-kubernetesx
+* Same for awsx
+** https://www.pulumi.com/docs/reference/pkg/nodejs/pulumi/awsx/ec2/
 * It seems that Pulumi has chosen a better path to be up-to-date with cloud providers, see selected comment : https://www.youtube.com/watch?v=RaoKcJGchKM&lc=UgyWvxQ7sclssgVdLpt4AaABAg 
 * Pulumi has made a Kube Yaml to Pulumi converter:
 ** https://www.pulumi.com/kube2pulumi/
 ** https://www.pulumi.com/blog/new-kubernetes-superpowers/
+* Pulumi is unclear for the use of certain methods, see
+** https://github.com/pulumi/pulumi/issues/2653
 
 
 This assignement :

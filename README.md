@@ -87,8 +87,7 @@ mkdir test-02-basic-gke-hello-world && cd test-02-basic-gke-hello-world
 pulumi new typescript
 </code>
 
-## Step 4 : Let's begin a more elaborate, ingress-based & cert-managed, deployment
-
+## Step 4 : Let's begin a more elaborate, ingress-based & cert-managed, deployment on GKE
 <code>
 mkdir test-03-foobar-on-gke-with-dns && cd test-03-foobar-on-gke-with-dns
 pulumi new kubernetes-typescript
@@ -101,10 +100,32 @@ pulumi new kubernetes-typescript
 ## https://cloud.google.com/container-registry/docs/advanced-authentication#gcloud-helper
 ## gcloud auth configure-docker
 # Created an account on CloudFlare, pick up a Zone and create an API Account.
-## pulumi config set cloudflare:apiToken
+## pulumi config set cloudflare:apiToken --secret
 # Get zoneId with Curl, and put it into config :
-## config pulumi config set cfZoneId --secret
+## pulumi config set cfZoneId --secret
 # Read (a lot) of GKE, CloudFlare & cert-manager doc
 # cert-manager will use CloudFlare dns account
+
+
+## Step 5 : Let's go to the same elaborate deployement, with k8x, on EKS
+
+
+<code>
+mkdir test-04-foobar-on-eks && cd test-04-foobar-on-eks
+pulumi new aws-typescript
+</code>
+# Create an AWS account. 
+# Create Access Key, following official documentation : https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys 
+# Install AWS cli, no debian package available for cli v2 : https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+# Configure AWS cli, which creates ~/.aws./credentials, used by pulumi
+#* aws configure
+# Tested basic AWS & Pulumi calls
+# Implement EKS in a multi-cluster way, with constructor approach
+# Configure Email Account & CloudFlare 
+#* pulumi config set emailAccount
+#* pulumi config set cloudflare:apiToken --secret
+#* pulumi config set cfZoneId --secret
+# Save locally iam_policy
+#* wget https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.3.0/docs/install/iam_policy.json
 
 

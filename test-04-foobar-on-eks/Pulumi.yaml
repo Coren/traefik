@@ -1,0 +1,3 @@
+name: test-04-foobar-on-eks
+runtime: nodejs
+description: Foobar on EKS

@@ -169,12 +169,12 @@ const ingress = new k8s.networking.v1.Ingress(baseName, {
             labels: appLabels,
             namespace: appNamespace,
             annotations: {
+                "kubernetes.io/ingress.class": "gce",
                 "kubernetes.io/ingress.global-static-ip-name": externalIP.name,
                 "cert-manager.io/cluster-issuer": acmeProvider,
             }
         },
         spec: {
-            ingressClassName: "gce",
             tls: [
                 { secretName: baseName,
                   hosts: [ serviceDNS ] }
