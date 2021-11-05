@@ -122,11 +122,9 @@ pulumi new aws-typescript
    - pulumi config set emailAccount
    - pulumi config set cloudflare:apiToken --secret
    - pulumi config set cfZoneId --secret
-8. Save locally iam_policy
+8. Saved locally iam_policy
    - wget https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.3.0/docs/install/iam_policy.json
-9. Set tags on subnet manually, ftm
+9. One can see tags on subnet are set
    - aws ec2 describe-subnets
-   - aws ec2 create-tags  --resources <privateSubnetId> --tags Key="kubernetes.io/role/internal-elb",Value=1
-   - aws ec2 create-tags  --resources <publicSubnetId> --tags Key="kubernetes.io/role/elb",Value=1
 
 

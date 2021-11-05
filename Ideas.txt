@@ -43,8 +43,7 @@ Open Issues encountered
 
 6) No example anywhere for JSON loading, needed for EKS LB IAM, but I managed to make my Useful
 
-7) Forced to tag manually subnet with aws cli like :
-  aws ec2 create-tags  --resources subnet-0f640f89a133b6f00 --tags Key="kubernetes.io/role/internal-elb",Value=1
+7) Forced to set tags. Other AWS doc said it was not necessary but it is.
   See https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.3/deploy/subnet_discovery/
 
 
