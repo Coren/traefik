@@ -17,18 +17,12 @@ export class EksCluster extends pulumi.ComponentResource {
 
         // Create a VPC for our cluster, with tags needed for ALB
         // See https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.3/deploy/subnet_discovery/
-        const vpc = new awsx.ec2.Vpc("vpc", {});
-        /* does not work
-        for (const publicSubnetId of vpc.publicSubnetIds) {
-            const tag = new aws.ec2.Tag(`public-${publicSubnetId}`, {
-                resourceId: publicSubnetId, key: "kubernetes.io/role/elb", value: "1"
-            });
-        }
-        for (const privateSubnetId of vpc.privateSubnetIds) {
-            const tag = new aws.ec2.Tag(`private-${privateSubnetId}`, {
-                resourceId: privateSubnetId, key: "kubernetes.io/role/internal-elb", value: "1"
-            });
-        }*/
+        const vpc = new awsx.ec2.Vpc("vpc", {
+            subnets: [
+              { type: 'public', tags: { "kubernetes.io/role/elb": "1" } },
+              { type: 'private', tags: { "kubernetes.io/role/internal-elb": "1" } }
+            ]
+        });
 
         // Create the EKS cluster itself.
         this.cluster = new eks.Cluster("cluster", {
